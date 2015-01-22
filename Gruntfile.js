@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
      jshint: {
-       files: ['server/*.js'],
+       files: ['app/**/*.js'],
        options: {
          // options here to override JSHint defaults
          jshintrc: true
@@ -14,5 +14,5 @@ module.exports = function(grunt) {
 
    //Load the plugin that provides the "jshint" task.
    grunt.loadNpmTasks('grunt-contrib-jshint');
-   //grunt.registerTask('default', ['jshint']);
+   grunt.registerTask('default', ['jshint']);
 };
