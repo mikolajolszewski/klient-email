@@ -1,3 +1,2 @@
-angular.module('emailClientApp').controller('outboxController', function ($rootScope, $scope, $http, model) {
-
+angular.module('emailClientApp').controller('outboxController', function ($scope) {
 });

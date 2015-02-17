@@ -8,7 +8,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
 			var table = element.find("table");
 			var lastEmail = {};
 
-      /* Rendering list from scratch */
+      // Rendering list from scratch
       var renderList = function() {
         emails = model.getInbox();
         if (emails) { // First iteration over not loaded server data needs to be passed
@@ -27,6 +27,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
         }
       };
 
+      // Remove element
       var removeElement = function(element) {
         console.log(element.id);
         element.parentNode.removeChild(element);
@@ -56,21 +57,22 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
             clickedEl = clickedEl.parentElement; // let the clicked element be the parent
           }
           if(clickedEl.tagName === 'TR') { // When it's the parent
+            model.markRead(clickedEl.id);
             $location.path("inbox/" + clickedEl.id); // Change location to email view
             scope.$apply();
           }
         }
 			});
 
-      /* Load the list on app start */
+      // Load the list on app start
       $rootScope.$on('initialDataLoaded', function (event, arg) {
         renderList();
       });
 
-      /* Render list every other time */
+      // Render list every other time
       renderList();
 
-      /* Make refresh every 2000 seconds */
+      // Make refresh every 2000 seconds
 			setInterval(function() {
 			  console.log('inside interval');
         model.getInboxUpdate(lastEmail); // update DOM

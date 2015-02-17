@@ -4,9 +4,10 @@
     {{text}}
   </div>
   <div ng-show="dataLoaded">
-    <div><b>Sent: </b>{{date}}</div>
-    <div><b>{{boxtype}}: </b>{{from}}</div>
-    <div><b>Subject: </b>{{subject}}</div>
-    <div>{{content}}</div>
+    <div><b>Sent: </b>{{date}}</div></br>
+    <div><b>{{boxtype}}: </b>{{from}}</div></br>
+    <div><b>Subject: </b>{{subject}}</div></br>
+    <div>{{content}}</div></br>
+    <span class="delete_link" ng-click="delete()"><i class="icon-trash"></i> Delete</span>
   </div>
 </div>

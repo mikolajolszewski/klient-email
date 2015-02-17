@@ -1,7 +1,8 @@
-angular.module('emailClientApp').controller('previewController', function ($rootScope, $scope, $http, model, $stateParams) {
+angular.module('emailClientApp').controller('previewController', function ($rootScope, $scope, model, $stateParams, $location) {
   $scope.dataLoading = true;
   $scope.dataLoaded = false;
 
+  // Function rendering email
   var renderEmail = function() {
     var email = model.getMailById($stateParams.emailid, $stateParams.box);
     if (email) {
@@ -21,10 +22,17 @@ angular.module('emailClientApp').controller('previewController', function ($root
     }
   };
 
+  $scope.delete = function () {
+    model.removeMailFromServer($stateParams.emailid);
+    $location.path('/inbox');
+  };
+
+  // Load data in case of page is refreshed on email view
   $rootScope.$on('initialDataLoaded', function (event, arg) {
       renderEmail();
   });
 
+  // Load data on click
   renderEmail();
 });
 

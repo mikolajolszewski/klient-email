@@ -11,7 +11,7 @@ angular.module('emailClientApp').service('mailUtils', function($http, $rootScope
      };
   };
 
-  // Function converting JSON object to mail object
+  // Function converting JSON object to DOM object with email
   this.prepareEmail = function(email) {
     var tableRow = document.createElement("tr"),
     fromCell = document.createElement("th"),

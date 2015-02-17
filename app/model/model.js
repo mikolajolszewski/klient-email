@@ -47,11 +47,15 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
     });
   };
 
-  // Delete mail from the server
+  // Delete mail from the server and from our current "inbox variable"
   this.removeMailFromServer = function (id) {
     $http.delete('/emails/'+id).success(function (res) {
-
     });
+    for (i = 0; i < inbox.length; i++) {
+      if (inbox[i].id === id) {
+        inbox.splice(i, 1);
+      }
+    }
   };
 
   // Get single mail by id from inbox or outbox
@@ -67,6 +71,20 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
         return(0);
       }
     }
+  };
+
+  // Mark email as read
+  this.markRead = function(id) {
+    updatedMail = {};
+    for (i = 0; i < inbox.length; i++) {
+      if (inbox[i].id === id) {
+        inbox[i].read = true;
+        updatedMail = inbox[i];
+      }
+    }
+    $http.put('/emails/'+id, updatedMail).success(function (res) {
+      console.log('zaktualizowane na serwie');
+    });
   };
 
 });
