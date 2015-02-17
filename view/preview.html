@@ -1,0 +1,12 @@
+<div view="preview">
+  <div class="loading" ng-show="dataLoading">
+    <img src="img/loader.gif"/></br></br>
+    {{text}}
+  </div>
+  <div ng-show="dataLoaded">
+    <div><b>Sent: </b>{{date}}</div>
+    <div><b>{{boxtype}}: </b>{{from}}</div>
+    <div><b>Subject: </b>{{subject}}</div>
+    <div>{{content}}</div>
+  </div>
+</div>
