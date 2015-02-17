@@ -1,1 +1,8 @@
-<div view="write">pisz email</div>
+<div ng-app="emailClientApp" ng-controller="writeController">
+<label>Create new email</label>
+<input type="text" placeholder="Send To:" name="email.sendto" ng-model="email.sendto"/>
+<input type="text" placeholder="Subject…" name="email.title" ng-model="email.title"/>
+</br>
+<textarea class="msgtextarea" type="text" name="email.body" ng-model="email.body"/>
+<button id="sendbtn" class="btn btn-large" type="button" ng-click="email.send()" >Send</button>
+</div>

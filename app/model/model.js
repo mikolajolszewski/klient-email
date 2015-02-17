@@ -1,4 +1,4 @@
-angular.module('emailClientApp').service('model', function($http, $rootScope) {
+angular.module('emailClientApp').service('model', function($http, $rootScope, $location) {
   var inbox, outbox;
 
   $http.get('/emails').success(function (res) {
@@ -8,6 +8,7 @@ angular.module('emailClientApp').service('model', function($http, $rootScope) {
 
 	$http.get('/sent').success(function (res) {
     outbox = res;
+	console.log(outbox);
   });
 
   this.getInbox = function() {
@@ -17,6 +18,17 @@ angular.module('emailClientApp').service('model', function($http, $rootScope) {
   this.getOutbox = function() {
     return outbox;
   }
+  
+  this.sendEmail = function(receivers, title, content) {
+	console.log(receivers, title, content, new Date());
+	var body = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
+	$http.post('/sent', body).success(function (res) {
+	
+		$location.path("outbox");
+		console.log(res);
+		});
+	}
+		
 
   this.getInboxUpdate = function(lastMail) {
     var newMail = [], j = 0;
