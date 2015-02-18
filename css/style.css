@@ -5,3 +5,5 @@
 .unread th{font-weight:700}
 .read th{font-weight:400}
 .msgtextarea {width:720px; height:300px}
+tr:hover{cursor:pointer}
+.delete_link:hover{cursor:pointer;text-decoration:underline}

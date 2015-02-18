@@ -2,7 +2,7 @@ angular.module('emailClientApp', ['ui.router'])
 .config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
     .state('inbox', {
-      url: "/",
+      url: "/inbox",
       controller: 'inboxController',
       templateUrl: "view/inbox.html"
     })
@@ -18,6 +18,10 @@ angular.module('emailClientApp', ['ui.router'])
       url: "/options",
       controller: 'optionsController',
       templateUrl: "view/options.html"
+    }).state('mailPreview', {
+      url: "/:box/:emailid",
+      controller: 'previewController',
+      templateUrl: "view/preview.html"
     });
 })
 ;

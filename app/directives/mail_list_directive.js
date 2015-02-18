@@ -8,7 +8,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
 			var table = element.find("table");
 			var lastEmail = {};
 
-      /* Rendering list from scratch */
+      // Rendering list from scratch
       var renderList = function() {
         emails = model.getInbox();
         if (emails) { // First iteration over not loaded server data needs to be passed
@@ -16,7 +16,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
             emails = emails.sort(mailUtils.sortBy('received',false)); // Sort the list
             lastEmail = emails[0]; // Store last email on the list (will be used while refreshing)
             for (i = 0; i < emails.length; i++) {
-              table.append(prepareEmail(emails[i]));
+              table.append(mailUtils.prepareEmail(emails[i]));
             }
             scope.dataLoading = false;
             scope.text = "";
@@ -25,39 +25,13 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
             scope.text = "Sorry. There is no message to show.";
           }
         }
-      }
+      };
 
-      /* Function preparing email <tr> DOM object */
-      var prepareEmail = function(email) {
-        var tableRow = document.createElement("tr"),
-        fromCell = document.createElement("th"),
-        subjectCell = document.createElement("th"),
-        contentCell = document.createElement("th"),
-        dateCell = document.createElement("th"),
-        deleteCell = document.createElement("th"),
-        date = new Date(email.received);
-
-        if (email.read === false) {
-          tableRow.className = "unread"
-        } else {
-          tableRow.className = "read"
-        }
-
-        tableRow.id = email.id
-        fromCell.innerHTML = email.sender;
-        subjectCell.innerHTML = email.title;
-        contentCell.innerHTML = email.content.substring(0,15) + '...';
-        dateCell.innerHTML = date;
-        deleteCell.innerHTML = '<i class="icon-trash"></i>';
-
-        tableRow.appendChild(fromCell);
-        tableRow.appendChild(subjectCell);
-        tableRow.appendChild(contentCell);
-        tableRow.appendChild(dateCell);
-        tableRow.appendChild(deleteCell);
-
-        return(tableRow);
-
+      // Remove element
+      var removeElement = function(element) {
+        console.log(element.id);
+        element.parentNode.removeChild(element);
+        model.removeMailFromServer(element.id);
       };
 
       // Function refreshing and adding new entries to the email list
@@ -68,7 +42,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
           newMail = newMail.sort(mailUtils.sortBy('received',false)); // Sort the list
           lastEmail = newMail[0]; // Store last email on the list (will be used while refreshing)
           for (i = 0; i < newMail.length; i++) {
-            table.prepend(prepareEmail(newMail[i]));
+            table.prepend(mailUtils.prepareEmail(newMail[i]));
           }
         }
       });
@@ -76,24 +50,29 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
 			// bind click to path change
 			element.bind('click', function(event) {
 				var clickedEl = event.target;
-				while(clickedEl !== undefined && clickedEl.tagName !== 'TR') {
-					clickedEl = clickedEl.parentElement;
-				}
-				if(clickedEl.tagName === 'TR') {
-					$location.path("view/" + clickedEl.id);
-					scope.$apply();
-				}
+				if (clickedEl.tagName === 'I') { // If we click trash icon
+          removeElement(clickedEl.parentElement.parentElement);
+				} else { // In other cases
+          while(clickedEl !== undefined && clickedEl.tagName !== 'TR') { // If that's not TR
+            clickedEl = clickedEl.parentElement; // let the clicked element be the parent
+          }
+          if(clickedEl.tagName === 'TR') { // When it's the parent
+            model.markRead(clickedEl.id);
+            $location.path("inbox/" + clickedEl.id); // Change location to email view
+            scope.$apply();
+          }
+        }
 			});
 
-      /* Load the list on app start */
+      // Load the list on app start
       $rootScope.$on('initialDataLoaded', function (event, arg) {
         renderList();
       });
 
-      /* Render list every other time */
+      // Render list every other time
       renderList();
 
-      /* Make refresh every 2000 seconds */
+      // Make refresh every 2000 seconds
 			setInterval(function() {
 			  console.log('inside interval');
         model.getInboxUpdate(lastEmail); // update DOM
