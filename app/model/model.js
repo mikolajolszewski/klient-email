@@ -72,6 +72,7 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
       }
     }
   };
+    
 
   // Mark email as read
   this.markRead = function(id) {
