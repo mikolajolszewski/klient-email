@@ -43,4 +43,29 @@ angular.module('emailClientApp').service('mailUtils', function($http, $rootScope
     return(tableRow);
 
   };
+    
+    this.prepareSentEmail = function(email) {
+    var tableRow = document.createElement("tr"),
+    toCell = document.createElement("th"),
+    subjectCell = document.createElement("th"),
+    contentCell = document.createElement("th"),
+    dateCell = document.createElement("th"),
+    date = new Date(email.sent);
+
+    tableRow.className = "read";
+        
+    tableRow.id = email.id;
+    toCell.innerHTML = email.receivers;
+    subjectCell.innerHTML = email.title;
+    contentCell.innerHTML = email.content.substring(0,15) + '...';
+    dateCell.innerHTML = date.toLocaleString();
+
+    tableRow.appendChild(toCell);
+    tableRow.appendChild(subjectCell);
+    tableRow.appendChild(contentCell);
+    tableRow.appendChild(dateCell);
+
+    return(tableRow);
+
+  };
 });

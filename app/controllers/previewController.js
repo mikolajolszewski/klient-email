@@ -6,14 +6,19 @@ angular.module('emailClientApp').controller('previewController', function ($root
   var renderEmail = function() {
     var email = model.getMailById($stateParams.emailid, $stateParams.box);
     if (email) {
-      date = new Date(email.received);
-      $scope.date = date.toLocaleString();
       if ($stateParams.box === 'inbox') { // If this is an inbox lookup or sent lookup
         $scope.from = email.sender;
         $scope.boxtype = "From";
-      } else if ($stateParams.box === 'inbox') {
-        $scope.from = email.sender;
-        $scope.boxtype = "From";
+        $scope.date = new Date(email.received).toLocaleString();
+        $scope.isInbox = true;
+      } else if ($stateParams.box === 'outbox') {
+          $scope.from = email.receivers;
+          //for (i = 0; i < email.receivers.length; i++) {
+          //      $scope.from += email.receivers[i] + " ";
+          //}
+        $scope.boxtype = "To";
+        $scope.date = new Date(email.sent).toLocaleString();
+        $scope.isInbox = false;
       }
       $scope.subject = email.title;
       $scope.content = email.content;
