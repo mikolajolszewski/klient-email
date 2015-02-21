@@ -72,7 +72,16 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
       }
     }
   };
+   
+  // Set background color
+  this.setBackgroundColor = function (color) {
+    localStorage.setItem ("color", color);
+  }     
     
+  // Get background color
+  this.getBackgroundColor = function () {
+    return localStorage.getItem("color");    
+  }
 
   // Mark email as read
   this.markRead = function(id) {

@@ -1,11 +1,10 @@
-angular.module('emailClientApp').controller('optionsController', function ($scope) {
+angular.module('emailClientApp').controller('optionsController', function ($scope, model) {
     
-  // Change color 
+  // Change background color 
   $scope.changeBackground = function (color) { 
-   localStorage.setItem ("color", color);
-   document.body.style.background = localStorage.getItem("color");
-  }
-
+    model.setBackgroundColor(color);
+    document.body.style.background = model.getBackgroundColor();
+  }  
   
 });
 
