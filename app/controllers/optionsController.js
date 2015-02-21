@@ -4,7 +4,6 @@ angular.module('emailClientApp').controller('optionsController', function ($scop
   $scope.changeBackground = function (color) { 
     model.setBackgroundColor(color);
     document.body.style.background = model.getBackgroundColor();
-  }  
-  
+  }
 });
 

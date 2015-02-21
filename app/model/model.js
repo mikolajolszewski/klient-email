@@ -71,16 +71,23 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
         return(0);
       }
     }
-  };
-   
+  };  
+    
   // Set background color
   this.setBackgroundColor = function (color) {
+    if (color === null) {
+      return;
+    }
     localStorage.setItem ("color", color);
   }     
     
   // Get background color
   this.getBackgroundColor = function () {
-    return localStorage.getItem("color");    
+    var color = localStorage.getItem("color");
+    if (color === null) {
+        return white;
+    }  
+    return color;    
   }
 
   // Mark email as read
