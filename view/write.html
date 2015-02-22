@@ -3,7 +3,7 @@
 <form name="emailForm">
 <button id="sendbtn" type="button" ng-click="email.addAdress()">Add receiver</button>
 	 <div class="form-group" ng-repeat="adress in email.adresses">
-		<input type="text" placeholder="Send To:" name="emailAdress" ng-model="adress.name" ng-pattern="pattern" required/>
+		<input type="text" style="minHeight:250px" placeholder="Send To:" name="emailAdress" ng-model="adress.name"  typeahead="tooltip.name as tooltip.name for tooltip in tooltips | filter:$viewValue" typeahead-editable="true" required/>
 	</div>	
 	<input type="text" placeholder="Subject…" name="emailTitle" ng-model="email.title" required/>
 	</br>
