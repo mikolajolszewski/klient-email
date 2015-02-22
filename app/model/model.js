@@ -21,9 +21,9 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 
   this.sendEmail = function(receivers, title, content) {
 	console.log(receivers, title, content, new Date());
-	var body = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
-	$http.post('/sent', body).success(function (res) {
-
+	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
+	$http.post('/sent', email).success(function (res) {
+		outbox.push(email);
 		$location.path("outbox");
 		console.log(res);
 		});
