@@ -20,8 +20,10 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
   };
 
   this.sendEmail = function(receivers, title, content) {
-	var body = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date().getTime()};
-	$http.post('/sent', body).success(function (res) {
+	console.log(receivers, title, content, new Date());
+	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
+	$http.post('/sent', email).success(function (res) {
+		outbox.push(email);
 		$location.path("outbox");
 		console.log(res);
 		});
