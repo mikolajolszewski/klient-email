@@ -9,6 +9,21 @@ angular.module('emailClientApp').controller('writeController', function ($scope,
 			name : ''
 		}
 	];
+	
+	// var tooltips = localStorage.getItem("tooltips");
+	var tooltips;
+	if(!tooltips){
+		tooltips = [{
+				name : 'example@domain.com'
+			}
+		];
+	};
+	console.log("tultypki: " + tooltips);
+	$scope.tooltips = tooltips;
+	//
+	// localStorage.setItem("tooltips", JSON.stringify(tooltips));
+	// console.log("tultypki ze storka: " + JSON.parse(localStorage.getItem("tooltips")));
+	
 
 	$scope.email.adresses = adresses;
 	// <div id="emailAdressesDiv" >
@@ -23,8 +38,10 @@ angular.module('emailClientApp').controller('writeController', function ($scope,
 			if (!regexpPattern.test(entry)) {
 				//inform about invalid email
 				console.log("email nieprawidlowy!!!");
-
+				window.alert("Email adress "+entry+ " is invalid");
 				return validAdressArray = false;
+			} else{
+				tooltips.push({name:entry});
 			}
 		});
 		return validAdressArray;
@@ -43,8 +60,12 @@ angular.module('emailClientApp').controller('writeController', function ($scope,
 			if (validateEmail(adressArray)) {
 				model.sendEmail(adressArray, title, body);
 			}
+			console.log("tultypki");
+			console.log(tooltips);
+			localStorage.setItem("tooltips", tooltips);
 		} else {
 			console.log("wypelnij wymagane pola");
+			window.alert("Fill all fields");
 		};
 	};
 

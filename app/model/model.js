@@ -21,13 +21,14 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 
   this.sendEmail = function(receivers, title, content) {
 	console.log(receivers, title, content, new Date());
-	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
+	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date().getTime()};
 	$http.post('/sent', email).success(function (res) {
 		outbox.push(email);
 		$location.path("outbox");
 		console.log(res);
 		});
-    $rootScope.emit('updateOutbox', body);
+		//not a function!
+    // $rootScope.emit('updateOutbox', email);
 	};
 
   // Get mails that are not currently on the list and notify directive

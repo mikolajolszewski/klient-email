@@ -1,4 +1,4 @@
-angular.module('emailClientApp', ['ui.router'])
+angular.module('emailClientApp', ['ui.router','ui.bootstrap'])
 .config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider
     .state('inbox', {
