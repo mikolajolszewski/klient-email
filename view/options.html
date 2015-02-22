@@ -1,1 +1,14 @@
-<div view="options">optionsy</div>
+<div view="options"><b>Options</b></div>
+<br />
+<div view="changeColoe"><b>Change Background Color</b></div>
+<button style="background-color:#34BF9A; height:25px;width:25px" ng-click="changeBackground('#34BF9A')"></button>
+<button style="background-color:#B137FC; height:25px;width:25px" ng-click="changeBackground('#B137FC')"></button>
+<button style="background-color:#FA7F0D; height:25px;width:25px" ng-click="changeBackground('#FA7F0D')"></button>
+<button style="background-color:#FF428A; height:25px;width:25px" ng-click="changeBackground('#FF428A')"></button>
+<button style="background-color:#A4A4A4; height:25px;width:25px" ng-click="changeBackground('#A4A4A4')"></button>
+<button style="background-color:white; height:25px;width:25px" ng-click="changeBackground('white')"></button>
+<br>
+<br>
+<div view="changeColoe"><b>Set Interval</b></div>
+Refresh time: <input id="setIntervalTextbox" type="text" name="Refresh" style="width: 40px;"> [s.]
+<button class="btn btn-primary" ng-click="changeInterval()">Apply</button>

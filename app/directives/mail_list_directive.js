@@ -76,7 +76,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
 			setInterval(function() {
 			  console.log('inside interval');
         model.getInboxUpdate(lastEmail); // update DOM
-      }, 20000);
+      }, model.getInterval());
 
     }
 	};
