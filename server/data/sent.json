@@ -16,5 +16,125 @@
       "sosnowski@outlook.com"
     ],
     "sent": 1421610528931
+<<<<<<< HEAD
+  },
+  {
+    "id": 1,
+    "title": "test",
+    "receivers": "mikolaj",
+    "content": "testowanko",
+    "sent": "2015-02-17T18:21:45.110Z"
+  },
+  {
+    "id": 1,
+    "title": "qwrqwe",
+    "receivers": "qwewe",
+    "content": "Test z 1 i newDate",
+    "sent": "2015-02-17T18:33:32.920Z"
+  },
+  {
+    "id": 1424198155139,
+    "title": "misku",
+    "receivers": "gettajmem",
+    "content": "lolo",
+    "sent": "2015-02-17T18:35:55.139Z"
+  },
+  {
+    "id": 1424198444540,
+    "title": "tytul",
+    "receivers": "Wysylamy",
+    "content": "tresc",
+    "sent": "2015-02-17T18:40:44.540Z"
+  },
+  {
+    "id": 1424198480167,
+    "title": "subject",
+    "receivers": "sendto",
+    "content": "title",
+    "sent": "2015-02-17T18:41:20.167Z"
+  },
+  {
+    "id": 1424198487670,
+    "title": "subject",
+    "receivers": "sendto",
+    "content": "title",
+    "sent": "2015-02-17T18:41:27.670Z"
+  },
+  {
+    "id": 1424198512176,
+    "title": "qq",
+    "receivers": "qq",
+    "content": "qq",
+    "sent": "2015-02-17T18:41:52.176Z"
+  },
+  {
+    "id": 1424198541630,
+    "title": "qweqwe",
+    "receivers": "qqwe",
+    "content": "qweqwe",
+    "sent": "2015-02-17T18:42:21.630Z"
+  },
+  {
+    "id": 1424598993858,
+    "title": "test",
+    "receivers": "test",
+    "content": "test",
+    "sent": "2015-02-22T09:56:33.858Z"
+  },
+  {
+    "id": 1424603059925,
+    "title": "Bardzo ważne info",
+    "receivers": "mikolaj@fronda.pl",
+    "content": "Marchewka to owoc",
+    "sent": "2015-02-22T11:04:19.925Z"
+  },
+  {
+    "id": 1424603059928,
+    "title": "Bardzo ważne info",
+    "receivers": "michal@pudelek.pl",
+    "content": "Marchewka to owoc",
+    "sent": "2015-02-22T11:04:19.928Z"
+  },
+  {
+    "id": "14246054379641",
+    "title": "qwe",
+    "receivers": "p@p.com",
+    "content": "qwe",
+    "sent": "2015-02-22T11:43:57.964Z"
+  },
+  {
+    "id": "14246054379672",
+    "title": "qwe",
+    "receivers": "a@p.com",
+    "content": "qwe",
+    "sent": "2015-02-22T11:43:57.967Z"
+  },
+  {
+    "id": 1424606047023,
+    "title": "qweqwe",
+    "receivers": "p@gm.com",
+    "content": "qweqew",
+    "sent": "2015-02-22T11:54:07.023Z"
+  },
+  {
+    "id": 1424613757255,
+    "title": "qwe",
+    "receivers": [
+      "qqwe@qwe.com"
+    ],
+    "content": "qwe",
+    "sent": "2015-02-22T14:02:37.255Z"
+  },
+  {
+    "id": 1424613788262,
+    "title": "qwe@qwe.com",
+    "receivers": [
+      "qwe@qwe.com",
+      "qwe@qwe.com"
+    ],
+    "content": "qwe",
+    "sent": "2015-02-22T14:03:08.262Z"
+=======
+>>>>>>> 814474d15a5dcab65c6819f9d0e820a8649a75d9
   }
 ]

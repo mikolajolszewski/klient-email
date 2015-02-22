@@ -1,0 +1,13 @@
+<div ng-app="emailClientApp" ng-controller="writeController">
+<label>Create new email</label>
+<form name="emailForm">
+<button id="sendbtn" type="button" ng-click="email.addAdress()">Add receiver</button>
+	 <div class="form-group" ng-repeat="adress in email.adresses">
+		<input type="text" placeholder="Send To:" name="emailAdress" ng-model="adress.name" ng-pattern="pattern" required/>
+	</div>	
+	<input type="text" placeholder="Subject…" name="emailTitle" ng-model="email.title" required/>
+	</br>
+	<textarea class="msgtextarea" type="text" name="emailBody" ng-model="email.body" required/>
+</form>
+<button id="sendbtn" class="btn btn-large" type="button" ng-click="email.send(emailForm)" >Send</button>
+</div>

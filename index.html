@@ -7,18 +7,14 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body ng-app="emailClientApp">
-  <div class="container" ng-controller="emailListController">
+  <div class="container">
     <div class="row">
       <div class="span12">
-        <h1 class="text-center">Ultra Minimalistic Email Client</h1>
+        <img src="img/logo.png" class="logo"/>
         <div class="row">
-          <div class="span3 text-right">
-            <button ng-click="getEmails()" class="btn btn-primary">Get Emails</button>
-          </div>
-          <div class="span9">
-            <textarea rows="15" cols="60">
-              {{emailsRes}}
-            </textarea>
+          <div data-ng-include data-src="'view/sidebar.html'"></div>
+          <div class="span9" ui-view>
+
           </div>
         </div>
       </div>
@@ -27,7 +23,16 @@
     <script src="lib/jquery-2.1.3.min.js"></script>
     <script src="lib/bootstrap.min.JS"></script>
     <script src="lib/angular.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
     <script src="app/app.js"></script>
-    <script src="app/controllers/emailListController.js"></script>
+    <script src="app/services/mail_utils.js"></script>
+     <script src="app/controllers/previewController.js"></script>
+    <script src="app/controllers/inboxController.js"></script>
+    <script src="app/controllers/outboxController.js"></script>
+    <script src="app/controllers/writeController.js"></script>
+    <script src="app/controllers/optionsController.js"></script>
+    <script src="app/model/model.js"></script>
+    <script src="app/directives/mail_list_directive.js"></script>
+    <script src="app/directives/outbox_list_directive.js"></script>
   </body>
 </html>
