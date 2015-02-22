@@ -8,7 +8,7 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 
 	$http.get('/sent').success(function (res) {
     outbox = res;
-	console.log(outbox);
+    $rootScope.$emit('initialOutboxDataLoaded');
   });
 
   this.getInbox = function() {
@@ -21,12 +21,13 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 
   this.sendEmail = function(receivers, title, content) {
 	console.log(receivers, title, content, new Date());
-	var body = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
-	$http.post('/sent', body).success(function (res) {
-
+	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
+	$http.post('/sent', email).success(function (res) {
+		outbox.push(email);
 		$location.path("outbox");
 		console.log(res);
 		});
+    $rootScope.emit('updateOutbox', body);
 	};
 
   // Get mails that are not currently on the list and notify directive
@@ -71,33 +72,44 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
         return(0);
       }
     }
-  };  
-    
+    else {
+        if (outbox) {
+            for (i = 0; i < outbox.length; i++) {
+              if (outbox[i].id === parseInt(id)) {
+                return(outbox[i]);
+              }
+            }
+      } else {
+        return(0);
+      }
+    }
+  };
+
   // Set background color
   this.setBackgroundColor = function (color) {
     if (color === null) {
       return;
     }
     localStorage.setItem ("color", color);
-  }     
-    
+  }
+
   // Get background color
   this.getBackgroundColor = function () {
     var color = localStorage.getItem("color");
     if (color === null) {
         return white;
-    }  
-    return color;    
+    }
+    return color;
   }
-  
-  // Set interval[ 
+
+  // Set interval[
   this.setInterval = function (time) {
     if (time === null) {
       return;
     }
     localStorage.setItem ("time", time);
   }
-  
+
   // Get Interval
   this.getInterval = function () {
     var time = localStorage.getItem("time");
