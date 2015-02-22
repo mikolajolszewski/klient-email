@@ -12,10 +12,7 @@ angular.module('emailClientApp').controller('previewController', function ($root
         $scope.date = new Date(email.received).toLocaleString();
         $scope.isInbox = true;
       } else if ($stateParams.box === 'outbox') {
-          $scope.from = email.receivers;
-          //for (i = 0; i < email.receivers.length; i++) {
-          //      $scope.from += email.receivers[i] + " ";
-          //}
+        $scope.from = email.receivers.toString();
         $scope.boxtype = "To";
         $scope.date = new Date(email.sent).toLocaleString();
         $scope.isInbox = false;

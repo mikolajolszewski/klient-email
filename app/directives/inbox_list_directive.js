@@ -31,16 +31,13 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
 
       // Remove element
       var removeElement = function(element) {
-        console.log(element.id);
         element.parentNode.removeChild(element);
         model.removeMailFromServer(element.id);
       };
 
       // Function refreshing and adding new entries to the email list
       $rootScope.$on('updateInbox', function (event, newMail) {
-        console.log(newMail);
         if (newMail.length > 0) {
-          console.log('passed',newMail);
           newMail = newMail.sort(mailUtils.sortBy('received',false)); // Sort the list
           lastEmail = newMail[0]; // Store last email on the list (will be used while refreshing)
           for (i = 0; i < newMail.length; i++) {
@@ -76,7 +73,6 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
 
       // Make refresh every some interval
 			setInterval(function() {
-			  console.log('inside interval');
         model.getInboxUpdate(lastEmail); // update DOM
       }, options.getInterval());
 

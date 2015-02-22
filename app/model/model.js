@@ -33,7 +33,6 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
   // Get mails that are not currently on the list and notify directive
   this.getInboxUpdate = function(lastMail) {
     var newMail = [], j = 0;
-    //console.log('atstart',newMail);
     $http.get('/emails').success(function (res) {
       inbox = res;
       for (i = 0; i < inbox.length; i++) {
@@ -94,7 +93,6 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
       }
     }
     $http.put('/emails/'+id, updatedMail).success(function (res) {
-      console.log('zaktualizowane na serwie');
     });
   };
 

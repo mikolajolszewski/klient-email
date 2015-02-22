@@ -19,7 +19,12 @@ angular.module('emailClientApp').service('mailUtils', function($http, $rootScope
     contentCell = document.createElement("th"),
     dateCell = document.createElement("th"),
     deleteCell = document.createElement("th"),
-    date = (new Date(email.received)).toLocaleString();
+    date;
+    if (box === "inbox") {
+      date = (new Date(email.received)).toLocaleString();
+    } else if (box === "outbox") {
+      date = (new Date(email.sent)).toLocaleString();
+    }
 
     if (email.read === false) {
       tableRow.className = "unread";
