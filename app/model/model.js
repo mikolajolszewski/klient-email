@@ -25,7 +25,8 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 		$location.path("outbox");
 		console.log(res);
 		});
-        $rootScope.$emit('updateOutbox', body);
+      
+    $rootScope.emit('updateOutbox', body);
 	};
 
   // Get mails that are not currently on the list and notify directive
