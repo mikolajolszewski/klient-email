@@ -1,10 +1,12 @@
-angular.module('emailClientApp').directive('emailList', function($rootScope, model, $location, mailUtils) {
+angular.module('emailClientApp').directive('emailList', function($rootScope, model, $location, mailUtils, options) {
   return {
     restrict: 'E',
 		templateUrl: 'app/directives/mail_list_directive_template.html',
 		link: function(scope, element) {
 			scope.text = "loading...";
 			scope.dataLoading = true;
+			scope.deleteCell = true;
+			scope.from_to = "From";
 			var table = element.find("table");
 			var lastEmail = {};
 
@@ -16,7 +18,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
             emails = emails.sort(mailUtils.sortBy('received',false)); // Sort the list
             lastEmail = emails[0]; // Store last email on the list (will be used while refreshing)
             for (i = 0; i < emails.length; i++) {
-              table.append(mailUtils.prepareEmail(emails[i]));
+              table.append(mailUtils.prepareEmail(emails[i],"inbox"));
             }
             scope.dataLoading = false;
             scope.text = "";
@@ -42,7 +44,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
           newMail = newMail.sort(mailUtils.sortBy('received',false)); // Sort the list
           lastEmail = newMail[0]; // Store last email on the list (will be used while refreshing)
           for (i = 0; i < newMail.length; i++) {
-            table.prepend(mailUtils.prepareEmail(newMail[i]));
+            table.prepend(mailUtils.prepareEmail(newMail[i], "inbox"));
           }
         }
       });
@@ -56,7 +58,7 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
           while(clickedEl !== undefined && clickedEl.tagName !== 'TR') { // If that's not TR
             clickedEl = clickedEl.parentElement; // let the clicked element be the parent
           }
-          if(clickedEl.tagName === 'TR') { // When it's the parent
+          if(clickedEl.tagName === 'TR' & clickedEl.parentElement.tagName !== 'THEAD') { // When it's the parent
             model.markRead(clickedEl.id);
             $location.path("inbox/" + clickedEl.id); // Change location to email view
             scope.$apply();
@@ -72,11 +74,11 @@ angular.module('emailClientApp').directive('emailList', function($rootScope, mod
       // Render list every other time
       renderList();
 
-      // Make refresh every 2000 seconds
+      // Make refresh every some interval
 			setInterval(function() {
 			  console.log('inside interval');
         model.getInboxUpdate(lastEmail); // update DOM
-      }, model.getInterval());
+      }, options.getInterval());
 
     }
 	};

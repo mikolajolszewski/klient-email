@@ -23,5 +23,4 @@ angular.module('emailClientApp', ['ui.router','ui.bootstrap'])
       controller: 'previewController',
       templateUrl: "view/preview.html"
     });
-})
-;
+});

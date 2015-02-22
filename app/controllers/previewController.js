@@ -27,6 +27,7 @@ angular.module('emailClientApp').controller('previewController', function ($root
     }
   };
 
+  // Delete currently viewed email
   $scope.delete = function () {
     model.removeMailFromServer($stateParams.emailid);
     $location.path('/inbox');

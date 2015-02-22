@@ -1,6 +1,7 @@
 angular.module('emailClientApp').service('model', function($http, $rootScope, $location) {
   var inbox, outbox;
 
+  // On app start get inbox and outbox from the server
   $http.get('/emails').success(function (res) {
     inbox = res;
     $rootScope.$emit('initialDataLoaded');
@@ -11,24 +12,22 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
     $rootScope.$emit('initialOutboxDataLoaded');
   });
 
+  // Return object with inbox
   this.getInbox = function() {
     return inbox;
   };
 
+  // Return object with outbox
   this.getOutbox = function() {
     return outbox;
   };
 
   this.sendEmail = function(receivers, title, content) {
-	console.log(receivers, title, content, new Date());
 	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date().getTime()};
-	$http.post('/sent', email).success(function (res) {
-		outbox.push(email);
-		$location.path("outbox");
-		console.log(res);
-		});
-		//not a function!
-    // $rootScope.emit('updateOutbox', email);
+    $http.post('/sent', email).success(function (res) {
+      outbox.push(email);
+      $location.path("outbox");
+    });
 	};
 
   // Get mails that are not currently on the list and notify directive
@@ -36,7 +35,6 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
     var newMail = [], j = 0;
     //console.log('atstart',newMail);
     $http.get('/emails').success(function (res) {
-      console.log('lastmail',lastMail);
       inbox = res;
       for (i = 0; i < inbox.length; i++) {
         if (inbox[i].received >= lastMail.received && inbox[i].id != lastMail.id) {
@@ -44,7 +42,6 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
           j++;
         }
       }
-      //console.log('afterfunction',newMail);
       $rootScope.$emit('updateInbox', newMail);
     });
   };
@@ -53,6 +50,7 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
   this.removeMailFromServer = function (id) {
     $http.delete('/emails/'+id).success(function (res) {
     });
+
     for (i = 0; i < inbox.length; i++) {
       if (inbox[i].id === id) {
         inbox.splice(i, 1);
@@ -85,40 +83,6 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
       }
     }
   };
-
-  // Set background color
-  this.setBackgroundColor = function (color) {
-    if (color === null) {
-      return;
-    }
-    localStorage.setItem ("color", color);
-  }
-
-  // Get background color
-  this.getBackgroundColor = function () {
-    var color = localStorage.getItem("color");
-    if (color === null) {
-        return white;
-    }
-    return color;
-  }
-
-  // Set interval[
-  this.setInterval = function (time) {
-    if (time === null) {
-      return;
-    }
-    localStorage.setItem ("time", time);
-  }
-
-  // Get Interval
-  this.getInterval = function () {
-    var time = localStorage.getItem("time");
-    if (time === null) {
-      return 20000;
-    }
-    return time;
-  }
 
   // Mark email as read
   this.markRead = function(id) {

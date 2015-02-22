@@ -12,14 +12,14 @@ angular.module('emailClientApp').service('mailUtils', function($http, $rootScope
   };
 
   // Function converting JSON object to DOM object with email
-  this.prepareEmail = function(email) {
+  this.prepareEmail = function(email, box) {
     var tableRow = document.createElement("tr"),
-    fromCell = document.createElement("th"),
+    mailCell = document.createElement("th"),
     subjectCell = document.createElement("th"),
     contentCell = document.createElement("th"),
     dateCell = document.createElement("th"),
     deleteCell = document.createElement("th"),
-    date = new Date(email.received);
+    date = (new Date(email.received)).toLocaleString();
 
     if (email.read === false) {
       tableRow.className = "unread";
@@ -28,42 +28,24 @@ angular.module('emailClientApp').service('mailUtils', function($http, $rootScope
     }
 
     tableRow.id = email.id;
-    fromCell.innerHTML = email.sender;
-    subjectCell.innerHTML = email.title;
+    if (box === "inbox") {
+      mailCell.innerHTML = email.sender;
+    } else if (box === "outbox") {
+      mailCell.innerHTML = email.receivers;
+    }
+    subjectCell.innerHTML = email.title.substring(0,15) + '...';
     contentCell.innerHTML = email.content.substring(0,15) + '...';
-    dateCell.innerHTML = date.toLocaleString();
+    dateCell.innerHTML = date.substring(0, date.length - 4);
     deleteCell.innerHTML = '<i class="icon-trash"></i>';
+    deleteCell.className = 'delete_cell';
 
-    tableRow.appendChild(fromCell);
+    tableRow.appendChild(mailCell);
     tableRow.appendChild(subjectCell);
     tableRow.appendChild(contentCell);
     tableRow.appendChild(dateCell);
-    tableRow.appendChild(deleteCell);
-
-    return(tableRow);
-
-  };
-    
-  this.prepareSentEmail = function(email) {
-    var tableRow = document.createElement("tr"),
-    toCell = document.createElement("th"),
-    subjectCell = document.createElement("th"),
-    contentCell = document.createElement("th"),
-    dateCell = document.createElement("th"),
-    date = new Date(email.sent);
-
-    tableRow.className = "read";
-        
-    tableRow.id = email.id;
-    toCell.innerHTML = email.receivers;
-    subjectCell.innerHTML = email.title;
-    contentCell.innerHTML = email.content.substring(0,15) + '...';
-    dateCell.innerHTML = date.toLocaleString();
-
-    tableRow.appendChild(toCell);
-    tableRow.appendChild(subjectCell);
-    tableRow.appendChild(contentCell);
-    tableRow.appendChild(dateCell);
+    if (box === "inbox") {
+      tableRow.appendChild(deleteCell);
+    }
 
     return(tableRow);
 
