@@ -8,7 +8,7 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 
 	$http.get('/sent').success(function (res) {
     outbox = res;
-	console.log(outbox);
+    $rootScope.$emit('initialOutboxDataLoaded');
   });
 
   this.getInbox = function() {
@@ -20,13 +20,19 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
   };
 
   this.sendEmail = function(receivers, title, content) {
+<<<<<<< HEAD
 	console.log(receivers, title, content, new Date());
 	var email = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date()};
 	$http.post('/sent', email).success(function (res) {
 		outbox.push(email);
+=======
+	var body = {"id":new Date().getTime(), "title":title, "receivers":receivers, "content":content, "sent": new Date().getTime()};
+	$http.post('/sent', body).success(function (res) {
+>>>>>>> 814474d15a5dcab65c6819f9d0e820a8649a75d9
 		$location.path("outbox");
 		console.log(res);
 		});
+    $rootScope.emit('updateOutbox', body);
 	};
 
   // Get mails that are not currently on the list and notify directive
@@ -67,6 +73,17 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
             return(inbox[i]);
           }
         }
+      } else {
+        return(0);
+      }
+    }
+    else {
+        if (outbox) {
+            for (i = 0; i < outbox.length; i++) {
+              if (outbox[i].id === parseInt(id)) {
+                return(outbox[i]);
+              }
+            }
       } else {
         return(0);
       }

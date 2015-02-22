@@ -8,6 +8,6 @@
     <div><b>{{boxtype}}: </b>{{from}}</div></br>
     <div><b>Subject: </b>{{subject}}</div></br>
     <div>{{content}}</div></br>
-    <span class="delete_link" ng-click="delete()"><i class="icon-trash"></i> Delete</span>
+    <span class="delete_link" ng-click="delete()" ng-show="isInbox"><i class="icon-trash"></i> Delete</span>
   </div>
 </div>
