@@ -10,24 +10,24 @@ angular.module('emailClientApp').controller('writeController', function ($scope,
 		}
 	];
 	
-	// var tooltips = localStorage.getItem("tooltips");
-	var tooltips;
+	var tooltips = JSON.parse(localStorage.getItem("tooltips"));
 	if(!tooltips){
+	console.log("tworzy");
 		tooltips = [{
-				name : 'example@domain.com'
+				name: 'example@domain.com'
+			}, 
+			{
+				name: 'adres@domena.pl'
 			}
-		];
+		]
 	};
 	console.log("tultypki: " + tooltips);
 	$scope.tooltips = tooltips;
-	//
-	// localStorage.setItem("tooltips", JSON.stringify(tooltips));
-	// console.log("tultypki ze storka: " + JSON.parse(localStorage.getItem("tooltips")));
+	localStorage.setItem("tooltips", JSON.stringify(tooltips));
 	
 
 	$scope.email.adresses = adresses;
-	// <div id="emailAdressesDiv" >
-
+	
 	var regexpPattern = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
 	$scope.email.pattern = regexpPattern;
 	//validacja email
@@ -41,7 +41,11 @@ angular.module('emailClientApp').controller('writeController', function ($scope,
 				window.alert("Email adress "+entry+ " is invalid");
 				return validAdressArray = false;
 			} else{
+				console.log("wkladam");
+				console.log({name:entry});
 				tooltips.push({name:entry});
+				console.log("po wlozeniu");
+				console.log(tooltips);
 			}
 		});
 		return validAdressArray;
@@ -60,9 +64,7 @@ angular.module('emailClientApp').controller('writeController', function ($scope,
 			if (validateEmail(adressArray)) {
 				model.sendEmail(adressArray, title, body);
 			}
-			console.log("tultypki");
-			console.log(tooltips);
-			localStorage.setItem("tooltips", tooltips);
+			localStorage.setItem("tooltips", JSON.stringify(tooltips));
 		} else {
 			console.log("wypelnij wymagane pola");
 			window.alert("Fill all fields");
