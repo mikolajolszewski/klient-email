@@ -25,7 +25,6 @@ angular.module('emailClientApp').service('model', function($http, $rootScope, $l
 		$location.path("outbox");
 		console.log(res);
 		});
-      
     $rootScope.emit('updateOutbox', body);
 	};
 

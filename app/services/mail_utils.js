@@ -44,7 +44,7 @@ angular.module('emailClientApp').service('mailUtils', function($http, $rootScope
 
   };
     
-    this.prepareSentEmail = function(email) {
+  this.prepareSentEmail = function(email) {
     var tableRow = document.createElement("tr"),
     toCell = document.createElement("th"),
     subjectCell = document.createElement("th"),
