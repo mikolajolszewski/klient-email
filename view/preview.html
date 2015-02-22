@@ -1,0 +1,13 @@
+<div view="preview" class="white-bg">
+  <div class="loading" ng-show="dataLoading">
+    <img src="img/loader.gif"/></br></br>
+    {{text}}
+  </div>
+  <div ng-show="dataLoaded">
+    <h3 class="mail_title">{{subject}}</h3>
+    <div><b>Sent: </b>{{date}}</div>
+    <div><b>{{boxtype}}: </b>{{from}}</div></br>
+    <div>{{content}}</div></br>
+    <span class="delete_link" ng-click="delete()" ng-show="isInbox"><i class="icon-trash"></i> Delete</span>
+  </div>
+</div>

@@ -1,20 +1,31 @@
 [
   {
-    "id": 1421610518917,
+    "id": 1424645942990,
     "title": "test1",
-    "content": "Cos tam",
     "receivers": [
-      "sosnowski@outlook.com"
+      "mikolaj@gmail.com"
     ],
-    "sent": 1421610518917
+    "content": "testowa wiadomość",
+    "sent": 1424645942991
   },
   {
-    "id": 1421610528931,
-    "title": "test2",
-    "content": "Cos tam",
+    "id": 1424646149250,
+    "title": "test 2 odbiorcow",
     "receivers": [
-      "sosnowski@outlook.com"
+      "pawel@gmail.com",
+      "mariuszmichal@domena.pl"
     ],
-    "sent": 1421610528931
+    "content": "śźćłó",
+    "sent": 1424646149250
+  },
+  {
+    "id": 1424646179957,
+    "title": "test3",
+    "receivers": [
+      "pawel@gmail.com",
+      "emilia@gmail.com"
+    ],
+    "content": "asdfasdf",
+    "sent": 1424646179957
   }
 ]
